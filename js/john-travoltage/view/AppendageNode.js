@@ -195,6 +195,7 @@ define( function( require ) {
         domElement.setAttribute( 'step', keyboardMotion.step );
         domElement.value = appendageNode.angleToPosition( appendage.angle, keyboardMotion.totalRange, keyboardMotion.max, options.keyboardMidPointOffset );
 
+        console.log( domElement.value );
         if (options.controls) {
           domElement.setAttribute( 'aria-controls', options.controls.join( ',' ));
         }

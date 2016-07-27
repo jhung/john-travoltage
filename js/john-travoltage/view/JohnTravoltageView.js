@@ -58,6 +58,27 @@ define( function( require ) {
    * @constructor
    */
   function JohnTravoltageView( model, tandem, options ) {
+
+
+    // HACK ALERT!
+    // Testing the nexus!
+    // http://169.254.86.49:9081/
+    var websocket = new WebSocket('ws://localhost:9081/bindModel/nexus.bonang.johnTravoltage/position.armPosition');
+     websocket.onmessage = function (evt) {
+         var inputs = JSON.parse(evt.data);
+
+         var armPosition = inputs.armPosition; // in degrees
+         var armPositionRadians = armPosition * Math.PI / 180;
+
+         var legPosition = inputs.legPosition; // in degrees;
+         var legPositionRadians = legPosition * Math.PI / 180;
+
+        //  console.log( legPositionRadians );
+         model.arm.angle = armPositionRadians;
+         model.leg.angle = legPositionRadians;
+        //  console.log( inputs.armPosition );
+     };
+
     var johnTravoltageView = this;
     this.model = model;
     options = _.extend( {
